@@ -1,0 +1,84 @@
+<div style=" margin: 0 25px 0 25px;">
+
+    <!-- <div><a [routerLink]="['/liveMatch']"><img src="{{tourUniqName=='badminton-gurgaon-yogems-badminton-championship-series-04-2017'?'../assets/batminton.jpg':'../assets/livescoreHeader.jpg'}}" style="width:100%; height: 80px;" /></a></div> -->
+    <div class="courtLivescore" *ngIf='liveMatch && liveMatch.length'>
+        <ul [ngStyle]="{'width': maxWidth+'%'}">
+            <li *ngFor='let court of liveMatch'
+              [ngStyle]="{'width': courtWidth+'%'}">
+              {{court.courtName}}
+            </li>
+        </ul>
+    </div>
+    <div class="courtLivescoredata" *ngIf='liveMatch && liveMatch.length'>
+        <h2 *ngIf="liveMatch && liveMatch.length == 0">No Live Matches</h2>
+        <h2 *ngIf="liveMatch && liveMatch.length > 0" class="text-center">Live Matches</h2>
+        <div *ngIf="liveMatch && liveMatch.length > 0" class="flexHeight">
+        <ul *ngFor='let court of liveMatch; let i = index' [ngStyle]="{'width': courtWidth+'%'}">
+            <li *ngFor="let data of court.matches" >
+               <div *ngIf="((court.matches | filterBy: {'live': true}).length >= 0 || (court.matches | filterBy: {'live': 1}).length >= 0) && (data.live == true || data.live == 1)">
+                 <h2>{{data.event.eventName}} &nbsp;<span style="text-transform: capitalize;">&nbsp;&nbsp;#{{data.matchserial}} &nbsp;&nbsp;-&nbsp;&nbsp; {{data.roundName}}</span></h2>
+                    <div style="width: 100%;display: table;">
+                        <div style="height: 220px; vertical-align: middle; display: table-cell;width: 100%;">
+                            <table class='table-bordered'
+                                   *ngIf='data && data.setDetailList.length && data.setDetailList.length > 0 ; else elseLiveBlock' style="width:80%; margin:0 auto; margin-bottom:15px;">
+                                <tbody>
+                                    <tr>
+                                        <td width="50%"><h3 class="scoreUserName">{{data.participant1.toLowerCase()}}</h3></td>
+                                        <td width="50%"><h3 class="scoreUserName">{{data.participant2.toLowerCase()}} </h3></td>
+                                    </tr>
+                                    <tr *ngFor='let matchScore of data.setDetailList; let index = index' >
+                                      <!-- ngClass="{{data.setDetailList.length-1 == index?'woclass':''}}" -->
+                                            <td style="border-bottom:1px solid #a5a5a5;" [style.font-size]="(data.setDetailList.length-1 == index ? '25px' : '18px')">{{(matchScore.setScoreList[matchScore.setScoreList.length-1]).team1Score}}</td>
+                                            <td [style.font-size]="(data.setDetailList.length-1 == index ? '25px' : '18px')">{{(matchScore.setScoreList[matchScore.setScoreList.length-1]).team2Score}}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                 <ng-template #elseLiveBlock>
+                     <div style="width: 100%;display: table;">
+                        <div style="height: 220px; vertical-align: middle; display: table-cell;width: 100%;">
+                           <h3>{{data.participant1.toLowerCase()}}</h3>
+                                            <h4>vs</h4>
+                           <h3>{{data.participant2.toLowerCase()}} </h3>
+                       </div>
+                     </div>
+                 </ng-template>
+
+                 <!--
+                 <h4 *ngIf="data.team1FinalScore" style="font-size: 20px;    color: white;">{{data.team1FinalScore}}</h4>
+                 <div *ngIf="data.matchScore" style="font-size: 25px;">
+                      {{data.matchScore}}
+                 </div>
+                  <h4 *ngIf="data.team2FinalScore" style="font-size: 20px;    color: white;">{{data.team2FinalScore}}</h4>
+                -->
+               </div>
+            </li>
+            <li *ngIf="(court.matches | filterBy: {'live': true}).length == 0 || (court.matches | filterBy: {'live': 1}).length == 0 " >
+                <h2>No live Matches</h2>
+            </li>
+        </ul>
+    <div class="liveScoreUpcomintEvents">
+        <h2 *ngIf="liveMatch.length == 0">No Upcoming Matches</h2>
+        <h2 *ngIf="liveMatch.length > 0">Upcoming Matches</h2>
+        <ul *ngFor="let court of liveMatch" [ngStyle]="{'width': courtWidth+'%'}">
+            <li *ngFor="let data of court.matches" >
+              <div *ngIf="((court.matches | filterBy: {'live': false}).length >= 0 || (court.matches | filterBy: {'live': 0}).length >= 0) && (data.live == false || data.live == 0)">
+                <h2>{{data.event.eventName}} &nbsp;<span style="text-transform: capitalize;">&nbsp;&nbsp;#{{data.matchserial}} &nbsp;&nbsp;-&nbsp;&nbsp; {{data.roundName.toLowerCase()}}</span></h2>
+                <h3 ngClass="{{data.wo==true?'woclass':''}}" style="text-transform: none;" *ngIf="data.minutesLeft">{{ "Walkover Time Left: "+data.minutesLeft+' minutes'}}</h3>
+                <h3>{{data.participant1.toLowerCase()}} </h3>
+                <h4>vs</h4>
+                <h3>{{data.participant2.toLowerCase()}} </h3>
+
+              </div>
+            </li>
+             <li *ngIf="(court.matches | filterBy: {'live': false}).length == 0 || (court.matches | filterBy: {'live': 0}).length == 0 " >
+                <h2>No Upcoming Matches</h2>
+            </li>
+         </ul>
+
+    </div>
+
+    <div *ngIf="liveMatch && liveMatch.length > 0" class="announcement"><marquee><h2>{{announcement}}</h2></marquee></div>
+<!--    <div class="logo" style="float:left;"><img src="images/logo.png" /></div>-->
+</div>

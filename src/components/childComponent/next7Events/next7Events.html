@@ -1,0 +1,22 @@
+<a href="/event/{{nextSeven.uniqueName}}">
+    <img class="img-responsive" src="{{(!_Helpers.isNullOrEmpty(nextSeven.fileUrl) ? nextSeven.fileUrl : getimagepath(nextSeven))}}" onError="this.onerror=null;this.src='../../assets/default.jpg';">
+    <p class="activityHeading">{{nextSeven.service}}</p>
+</a>
+<p class="dateSec skyblueback" *ngIf="(_Helpers.checksamemonth(nextSeven.startDateTime,nextSeven.endDateTime))==2">{{_Helpers.changeDateFormat(nextSeven.startDateTime,'specialmonth')}} {{_Helpers.changeDateFormat(nextSeven.startDateTime,'specialdate')}}-{{_Helpers.changeDateFormat(nextSeven.endDateTime,'specialdate')}},&nbsp;<span> {{_Helpers.changeDateFormat(nextSeven.startDateTime,'specialyear')}} </span><span class="TournamentCity">{{nextSeven.venue.city}}</span></p>
+<p class="dateSec skyblueback" *ngIf="(_Helpers.checksamemonth(nextSeven.startDateTime,nextSeven.endDateTime))==1">{{_Helpers.changeDateFormat(nextSeven.startDateTime,'specialmonth')}},&nbsp;<span> {{_Helpers.changeDateFormat(nextSeven.startDateTime,'specialyear')}} </span><span class="TournamentCity">{{nextSeven.venue.city}}</span></p>
+<p class="dateSec skyblueback" *ngIf="(_Helpers.checksamemonth(nextSeven.startDateTime,nextSeven.endDateTime))==3">{{_Helpers.changeDateFormat(nextSeven.startDateTime,'specialmonth')}} {{_Helpers.changeDateFormat(nextSeven.startDateTime,'specialdate')}}-{{_Helpers.changeDateFormat(nextSeven.endDateTime,'specialmonth')}} {{_Helpers.changeDateFormat(nextSeven.endDateTime,'specialdate')}},&nbsp;<span> {{_Helpers.changeDateFormat(nextSeven.startDateTime,'specialyear')}} </span><span class="TournamentCity">{{nextSeven.venue.city}}</span></p>
+<p class="dateSec skyblueback" *ngIf="(_Helpers.checksamemonth(nextSeven.startDateTime,nextSeven.endDateTime))==4">{{_Helpers.changeDateFormat(nextSeven.startDateTime,'specialmonth')}} {{_Helpers.changeDateFormat(nextSeven.startDateTime,'specialdate')}},&nbsp;<span> {{_Helpers.changeDateFormat(nextSeven.startDateTime,'specialyear')}} </span><span class="TournamentCity">{{nextSeven.venue.city}}</span></p>
+<div class="detailSec">
+    <a href="/event/{{nextSeven.uniqueName}}">
+        <h3>{{nextSeven.name}}</h3>
+    </a>
+    <h4>{{!_Helpers.isNullOrEmpty(nextSeven.venue.address1)?nextSeven.venue.address1+', ':' '}} {{!_Helpers.isNullOrEmpty(nextSeven.venue.address2)?nextSeven.venue.address2+', ':' '}}{{nextSeven.venue.city}}</h4>
+    <div class="clearfix"></div>
+</div>
+<div class="events eventHeight">
+    <div class="positionButtonFix">
+        <ul class="RegisterButton">
+            <li><a href="/event/{{nextSeven.uniqueName}}" class="knowmore">Know More</a></li>
+        </ul>
+    </div>
+</div>

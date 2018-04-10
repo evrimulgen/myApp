@@ -1,0 +1,90 @@
+<p class="hurry" *ngIf="_Helpers.datediffforreg(eventdata.lastDateRegistration) !== 0 && _Helpers.datediffforreg(eventdata.lastDateRegistration) >= -5 && _Helpers.datediffforreg(eventdata.lastDateRegistration,'tillLastMomentOfDay') <= 0" ><a href="{{eventdata.isParent==1?'/annual-event/':'/event/'}}{{eventdata.uniqueName}}" ><img src="https://d2ke5tbemv7zww.cloudfront.net/images/hurry.png"/></a></p>
+<div class=" tu-part clearfix bnb0 {{ eventdata.isUserRegistered ? 'gradient_bgBlue borderYello' : ''}}">
+    <div class="registrationOpen">
+        <h6 *ngIf="rightCornerText(eventdata)">{{rightCornerText(eventdata)}}</h6>
+        <a href="{{eventdata.isParent==1?'/annual-event/':'/event/'}}{{eventdata.uniqueName}}" >
+            <img *ngIf='!eventdata.thumbUrl &&  !eventdata.cdnThumbUrl' class="img-responsive" src="{{eventdata.thumbUrl ? eventdata.thumbUrl :  eventdata.cdnThumbUrl}}" onError="this.onerror=null;this.src='images/nextsevenevent/default.jpg';">
+            <img *ngIf='eventdata.thumbUrl ||  eventdata.cdnThumbUrl' class="img-responsive" src="{{eventdata.thumbUrl ? eventdata.thumbUrl :  eventdata.cdnThumbUrl}}" onError="this.onerror=null;this.src='images/default.jpg';">
+        </a>
+
+        <!-- <img *ngIf="(!eventdata.thumbUrl &&  !eventdata.cdnThumbUrl) && (!_Helpers.compairDateWithCurrentDate(eventdata.tournamentRegStartDate) || _Helpers.isNullOrEmpty(eventdata.tournamentRegStartDate)) && (eventdata.isParent == 0 || eventdata.isParent == null) && eventdata.uniqueName != 'noida-4th-gautam-budh-nagar-table-tennis-championship-12-2016'" class="img-responsive" src="images/nextsevenevent/default.jpg">
+        <img *ngIf="(eventdata.thumbUrl ||  eventdata.cdnThumbUrl) && (!_Helpers.compairDateWithCurrentDate(eventdata.tournamentRegStartDate) || _Helpers.isNullOrEmpty(eventdata.tournamentRegStartDate)) && (eventdata.isParent == 0 || eventdata.isParent == null) && eventdata.uniqueName != 'noida-4th-gautam-budh-nagar-table-tennis-championship-12-2016'" class="img-responsive" src="{{eventdata.thumbUrl ? eventdata.thumbUrl : eventdata.cdnThumbUrl}}"  onError="this.onerror=null;this.src='images/default.jpg';"> -->
+
+        <!--
+        <a *ngIf="!(!_Helpers.compairDateWithCurrentDate(eventdata.tournamentRegStartDate) || _Helpers.isNullOrEmpty(eventdata.tournamentRegStartDate)) || (eventdata.isParent == 1) || eventdata.uniqueName == 'noida-4th-gautam-budh-nagar-table-tennis-championship-12-2016'" href="{{eventdata.isParent==1?'/annual-event/':'/event/'}}{{eventdata.uniqueName}}" >
+            <img *ngIf='!eventdata.thumbUrl &&  !eventdata.cdnThumbUrl' class="img-responsive" src="{{eventdata.thumbUrl ? eventdata.thumbUrl :  eventdata.cdnThumbUrl}}" onError="this.onerror=null;this.src='images/nextsevenevent/default.jpg';">
+            <img *ngIf='eventdata.thumbUrl ||  eventdata.cdnThumbUrl' class="img-responsive" src="{{eventdata.thumbUrl ? eventdata.thumbUrl :  eventdata.cdnThumbUrl}}" onError="this.onerror=null;this.src='images/default.jpg';">
+        </a>
+
+        <img *ngIf="(!eventdata.thumbUrl &&  !eventdata.cdnThumbUrl) && (!_Helpers.compairDateWithCurrentDate(eventdata.tournamentRegStartDate) || _Helpers.isNullOrEmpty(eventdata.tournamentRegStartDate)) && (eventdata.isParent == 0 || eventdata.isParent == null) && eventdata.uniqueName != 'noida-4th-gautam-budh-nagar-table-tennis-championship-12-2016'" class="img-responsive" src="images/nextsevenevent/default.jpg">
+        <img *ngIf="(eventdata.thumbUrl ||  eventdata.cdnThumbUrl) && (!_Helpers.compairDateWithCurrentDate(eventdata.tournamentRegStartDate) || _Helpers.isNullOrEmpty(eventdata.tournamentRegStartDate)) && (eventdata.isParent == 0 || eventdata.isParent == null) && eventdata.uniqueName != 'noida-4th-gautam-budh-nagar-table-tennis-championship-12-2016'" class="img-responsive" src="{{eventdata.thumbUrl ? eventdata.thumbUrl : eventdata.cdnThumbUrl}}"  onError="this.onerror=null;this.src='images/default.jpg';">
+
+      -->
+        <p class="activityHeading">{{eventdata.service}}</p>
+
+        <div class="regist">
+            <span *ngIf="!_Helpers.isNullOrEmpty(eventdata.tournamentRegStartDate) && !_Helpers.compairDateWithCurrentDate(eventdata.tournamentRegStartDate) && _Helpers.compairlastDateWithCurrentDate(eventdata.lastDateRegistration)"><p class="registradionDate">Registrations from &nbsp;<label>{{_Helpers.changeDateFormat(eventdata.tournamentRegStartDate, 'specialmonth')}}&nbsp;{{_Helpers.changeDateFormat(eventdata.tournamentRegStartDate, 'specialdate')}}</label></p></span>
+            <span *ngIf="!_Helpers.isNullOrEmpty(eventdata.tournamentRegStartDate) && _Helpers.compairDateWithCurrentDate(eventdata.tournamentRegStartDate) && _Helpers.compairlastDateWithCurrentDate(eventdata.lastDateRegistration)"><a class="registradionDate"  href="{{eventdata.isParent==1?'/annual-event/':'/event/'}}{{eventdata.uniqueName}}" >Registrations open until &nbsp;<label>{{_Helpers.changeDateFormat(eventdata.lastDateRegistration, 'specialmonth')}}&nbsp;{{_Helpers.changeDateFormat(eventdata.lastDateRegistration, 'specialdate')}}</label></a></span>
+        </div>
+    </div>
+    <p class="dateSec {{(!_Helpers.compairDateWithCurrentDate(eventdata.tournamentRegStartDate) || _Helpers.isNullOrEmpty(eventdata.tournamentRegStartDate)) ? (eventdata.isParent == 1 ? 'yelloback' : 'lightblueback') : 'yelloback'}}" *ngIf="(_Helpers.checksamemonth(eventdata.startDateTime, eventdata.endDateTime)) == 2">{{_Helpers.changeDateFormat(eventdata.startDateTime, 'specialmonth')}} {{_Helpers.changeDateFormat(eventdata.startDateTime, 'specialdate')}}-{{_Helpers.changeDateFormat(eventdata.endDateTime, 'specialdate')}},&nbsp;<span>{{_Helpers.changeDateFormat(eventdata.startDateTime, 'specialyear')}}</span><span class="TournamentCity">{{eventdata.venue.city}}</span></p>
+    <p class="dateSec {{(!_Helpers.compairDateWithCurrentDate(eventdata.tournamentRegStartDate) || _Helpers.isNullOrEmpty(eventdata.tournamentRegStartDate)) ? (eventdata.isParent == 1 ? 'yelloback' : 'lightblueback') : 'yelloback'}}" *ngIf="(_Helpers.checksamemonth(eventdata.startDateTime, eventdata.endDateTime)) == 1">{{_Helpers.changeDateFormat(eventdata.startDateTime, 'specialmonth')}},&nbsp;<span>{{_Helpers.changeDateFormat(eventdata.startDateTime, 'specialyear')}}</span><span class="TournamentCity">{{eventdata.venue.city}}</span></p>
+    <p class="dateSec {{(!_Helpers.compairDateWithCurrentDate(eventdata.tournamentRegStartDate) || _Helpers.isNullOrEmpty(eventdata.tournamentRegStartDate)) ? (eventdata.isParent == 1 ? 'yelloback' : 'lightblueback') : 'yelloback'}}" *ngIf="(_Helpers.checksamemonth(eventdata.startDateTime, eventdata.endDateTime)) == 3">{{_Helpers.changeDateFormat(eventdata.startDateTime, 'specialmonth')}} {{_Helpers.changeDateFormat(eventdata.startDateTime, 'specialdate')}}-{{_Helpers.changeDateFormat(eventdata.endDateTime, 'specialmonth')}} {{_Helpers.changeDateFormat(eventdata.endDateTime, 'specialdate')}},&nbsp;<span> {{_Helpers.changeDateFormat(eventdata.startDateTime, 'specialyear')}}</span><span class="TournamentCity">{{eventdata.venue.city}}</span></p>
+    <p class="dateSec {{(!_Helpers.compairDateWithCurrentDate(eventdata.tournamentRegStartDate) || _Helpers.isNullOrEmpty(eventdata.tournamentRegStartDate)) ? (eventdata.isParent == 1 ? 'yelloback' : 'lightblueback') : 'yelloback'}}" *ngIf="(_Helpers.checksamemonth(eventdata.startDateTime, eventdata.endDateTime)) == 4">{{_Helpers.changeDateFormat(eventdata.startDateTime, 'specialmonth')}} {{_Helpers.changeDateFormat(eventdata.startDateTime, 'specialdate')}},&nbsp;<span> {{_Helpers.changeDateFormat(eventdata.startDateTime, 'specialyear')}}</span><span class="TournamentCity">{{eventdata.venue.city}}</span></p>
+
+    <div class="detailSec">
+        <a *ngIf="!(!_Helpers.compairDateWithCurrentDate(eventdata.tournamentRegStartDate) || _Helpers.isNullOrEmpty(eventdata.tournamentRegStartDate)) || (eventdata.isParent == 1) || eventdata.uniqueName == 'noida-4th-gautam-budh-nagar-table-tennis-championship-12-2016'" href="{{eventdata.isParent==1?'/annual-event/':'/event/'}}{{eventdata.uniqueName}}" >
+            <h3>{{eventdata.name}}</h3>
+        </a>
+
+        <h3  *ngIf="(!_Helpers.compairDateWithCurrentDate(eventdata.tournamentRegStartDate) || _Helpers.isNullOrEmpty(eventdata.tournamentRegStartDate)) && (eventdata.isParent == 0 || eventdata.isParent == null) && eventdata.uniqueName != 'noida-4th-gautam-budh-nagar-table-tennis-championship-12-2016'">{{eventdata.name}}</h3>
+         <p class="blackColor"><b>Organiser:</b>&nbsp;{{eventdata.organizedBy}}</p>
+         <h4>{{!_Helpers.isNullOrEmpty(eventdata.venue.address1) ? eventdata.venue.address1 + ', ' : ' '}} {{!_Helpers.isNullOrEmpty(eventdata.venue.address2) ? eventdata.venue.address2 + ', ' : ' '}}{{eventdata.venue.city}}</h4>
+        <ul class="ageGroup">
+              <li *ngFor="let value of _Helpers.filterEventArray(eventdata.events, ['age','name'])">
+                {{value}}
+              </li>
+        </ul>
+        <div class="list-age">
+            <ul class="ageGroup ageGlist">
+                <li *ngFor="let age of _Helpers.filterEventArray(eventdata.events, ['userGender','name'])">{{age + 's'}} </li>
+                <li *ngFor="let gtype of _Helpers.filterEventArray(eventdata.events, ['style','name'])">{{gtype }} </li>
+            </ul>
+        </div>
+    </div>
+    <div class="events eventHeight">
+        <div class="positionButtonFix">
+            <ul class="RegisterButton" *ngIf="!eventdata.isUserRegistered">
+                <!-- <registration-confirmation *ngIf="getConfimation" getconfirmation="getConfimation" tourobj="eventdata" ></registration-confirmation> -->
+
+                <li *ngIf="_Helpers.compairDateWithCurrentDate(eventdata.tournamentRegStartDate) && _Helpers.compairlastDateWithCurrentDate(eventdata.lastDateRegistration) && checkticket(eventdata) && eventdata.serviceHash != '5a20a074-eda9-11e5-8862-065f74a112cd'">
+                  <!-- {{_Helpers.getRegistrationButtonLink(eventdata).url}} -->
+                    <a href="#" ng-click="goForTournamentRegistration(eventdata)" class="RegisterNew">Register</a>
+                </li>
+                <li *ngIf="(_Helpers.compairDateWithCurrentDate(eventdata.tournamentRegStartDate) || eventdata.isParent == 1) && eventdata.uniqueName != 'yogems-cricket-championship-series-2016-noida-12-2016' || eventdata.uniqueName == 'noida-4th-gautam-budh-nagar-table-tennis-championship-12-2016'"><a href="{{eventdata.isParent==1?'/annual-event/':'/event/'}}{{eventdata.uniqueName}}" class="knowmore">Know More</a></li>
+                <li *ngIf="_Helpers.compairDateWithCurrentDate(eventdata.drawDateAndTime) && checkticket(eventdata) && eventdata.serviceHash != '5a20a074-eda9-11e5-8862-065f74a112cd'"><a href="#" class="DrawNew">Draws</a></li>
+                <!-- /event/draws/tun?tourUniqName={{eventdata.uniqueName}}&eventHash={{eventdata.events[0].eventHash}} -->
+                <li *ngIf="_Helpers.compairDateWithCurrentDate(eventdata.matchListDateAndTime) && checkticket(eventdata) && eventdata.serviceHash != '5a20a074-eda9-11e5-8862-065f74a112cd'"><a href="/match/{{eventdata.uniqueName}}?d={{ _Helpers.dateLieBetweenTwoDates(_Helpers.changeDateFormat(eventdata.startDateTime, 'serverdate'), _Helpers.changeDateFormat(eventdata.endDateTime, 'serverdate')) ? _Helpers.changeDateFormat(currentDate, 'serverdate') : _Helpers.changeDateFormat(eventdata.startDateTime, 'serverdate')}}" class="MatchesNew">Matches</a></li>
+                <li *ngIf="_Helpers.compairDateWithCurrentDate(eventdata.matchListDateAndTime) && checkticket(eventdata) && eventdata.serviceHash == '5a20a074-eda9-11e5-8862-065f74a112cd'"><a href="/event/{{eventdata.uniqueName}}#fixtures" class="MatchesNew">Matches</a></li>
+
+            </ul>
+            <ul *ngIf="eventdata.isUserRegistered" class="RegisterButton" ng-show="eventdata.uniqueName != 'Badminton-Gurgaon-21GurgaonDistrictOpenBadmintonChampionship-2016-2017'">
+
+                <li *ngIf="eventdata.uniqueName != 'yogems-cricket-championship-series-2016-noida-12-2016'">
+                  <!-- {{eventdata.isParent==1?'/annual-event/':'/winners/'}}{{eventdata.uniqueName}} -->
+                    <a href="#"  class="Result" >Results</a>
+                </li>
+                <li *ngIf="eventdata.uniqueName == 'yogems-cricket-championship-series-2016-noida-12-2016'">
+                  <!-- {{eventdata.isParent==1?'/annual-event/':'/event/'}}{{eventdata.uniqueName + '?results'}} -->
+                    <a href="#"  class="Result" >Results</a>
+                </li>
+                <li>
+                  <!-- /gallery/{{eventdata.uniqueName}} -->
+                    <a href="#"  class="Photo"  >Photos</a> </li>
+                <li>
+                    <a href="/press/{{eventdata.uniqueName}}"  class="Press"  >Press</a></li>
+            </ul>
+        </div>
+        <div *ngIf="((!_Helpers.compairDateWithCurrentDate(eventdata.tournamentRegStartDate) || _Helpers.isNullOrEmpty(eventdata.tournamentRegStartDate)) && (eventdata.isParent == 0 || eventdata.isParent == null) && eventdata.uniqueName != 'noida-4th-gautam-budh-nagar-table-tennis-championship-12-2016') && !eventdata.isUserRegistered"><p class="stayTuned"><abbr>Stay Tuned</abbr></p></div>
+    </div>
+</div>

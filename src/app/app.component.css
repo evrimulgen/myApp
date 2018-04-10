@@ -1,0 +1,30 @@
+.demo-layout-transparent {
+  background: linear-gradient(
+      rgba(236, 236, 238, 0.45),
+      rgba(236, 236, 238, 0.45)
+    );
+  /* height: 400px; */
+}
+
+/* Nav Bar */
+.demo-layout-transparent .mdl-layout__header,
+.demo-layout-transparent .mdl-layout__drawer-button {
+
+  background: linear-gradient(to right,#fff 8%,#0d9cd8 55%,#0d9cd8 100%);
+  color: white;
+}
+
+/* Header Text */
+.header-text{
+  text-align: center;
+  vertical-align: middle;
+  line-height: 250px;
+  color: white;
+}
+/* Content Wrapper */
+.container{
+  width: 80%;
+  margin: 0 auto;
+}
+.contentWrapper{padding:0;}
+.loadingMorePosts{display:block;margin:auto;}; 

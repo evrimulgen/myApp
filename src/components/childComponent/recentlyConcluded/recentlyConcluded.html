@@ -1,0 +1,72 @@
+<div class="tu-part clearfix borderNone">
+  <a *ngIf="recentlyEventData.uniqueName=='Badminton-Gurgaon-21GurgaonDistrictOpenBadmintonChampionship-2016-2017'" href="/specialevent/{{recentlyEventData.uniqueName}}">
+    <img class="img-responsive" src="{{recentlyEventData.fileUrl}}">
+    <p class="activityHeading">{{eventdata.service}}</p>
+  </a>
+  <a *ngIf="recentlyEventData.uniqueName!='Badminton-Gurgaon-21GurgaonDistrictOpenBadmintonChampionship-2016-2017'" href="{{recentlyEventData.isParent==1?'/annual-event/':'/event/'}}{{recentlyEventData.uniqueName}}">
+    <img class="img-responsive" src="{{recentlyEventData.fileUrl}}">
+    <p class="activityHeading">{{recentlyEventData.service}}</p>
+  </a>
+
+
+  <p class="dateSec darkblueback" *ngIf="(_Helpers.checksamemonth(recentlyEventData.startDateTime,recentlyEventData.endDateTime))==2">{{_Helpers.changeDateFormat(recentlyEventData.startDateTime,'specialmonth')}} {{_Helpers.changeDateFormat(recentlyEventData.startDateTime,'specialdate')}}-{{_Helpers.changeDateFormat(recentlyEventData.endDateTime,'specialdate')}},&nbsp;<span> {{_Helpers.changeDateFormat(recentlyEventData.startDateTime,'specialyear')}} </span>
+    <span
+      class="TournamentCity">{{recentlyEventData.venue.city}}</span>
+  </p>
+  <p class="dateSec darkblueback" *ngIf="(_Helpers.checksamemonth(recentlyEventData.startDateTime,recentlyEventData.endDateTime))==1">{{_Helpers.changeDateFormat(recentlyEventData.startDateTime,'specialmonth')}},&nbsp;<span> {{_Helpers.changeDateFormat(recentlyEventData.startDateTime,'specialyear')}} </span><span class="TournamentCity">{{recentlyEventData.venue.city}}</span></p>
+  <p class="dateSec darkblueback" *ngIf="(_Helpers.checksamemonth(recentlyEventData.startDateTime,recentlyEventData.endDateTime))==3">{{_Helpers.changeDateFormat(recentlyEventData.startDateTime,'specialmonth')}} {{_Helpers.changeDateFormat(recentlyEventData.startDateTime,'specialdate')}}-{{_Helpers.changeDateFormat(recentlyEventData.endDateTime,'specialmonth')}} {{_Helpers.changeDateFormat(recentlyEventData.endDateTime,'specialdate')}},&nbsp;<span> {{_Helpers.changeDateFormat(recentlyEventData.startDateTime,'specialyear')}} </span>
+    <span
+      class="TournamentCity">{{recentlyEventData.venue.city}}</span>
+  </p> 
+  <p class="dateSec darkblueback" *ngIf="(_Helpers.checksamemonth(recentlyEventData.startDateTime,recentlyEventData.endDateTime))==4">{{_Helpers.changeDateFormat(recentlyEventData.startDateTime,'specialmonth')}} {{_Helpers.changeDateFormat(recentlyEventData.startDateTime,'specialdate')}},&nbsp;<span> {{_Helpers.changeDateFormat(recentlyEventData.startDateTime,'specialyear')}} </span><span class="TournamentCity">{{recentlyEventData.venue.city}}</span></p>
+  <div class="detailSec">
+
+    <a *ngIf="recentlyEventData.uniqueName=='Badminton-Gurgaon-21GurgaonDistrictOpenBadmintonChampionship-2016-2017'" href="/specialevent/{{recentlyEventData.uniqueName}}">
+      <h3 class="lightGrey">
+             {{recentlyEventData.name}}
+                                                       </h3>
+    </a>
+    <a *ngIf="recentlyEventData.uniqueName!='Badminton-Gurgaon-21GurgaonDistrictOpenBadmintonChampionship-2016-2017'" href="{{recentlyEventData.isParent==1?'/annual-event/':'/event/'}}{{recentlyEventData.uniqueName}}">
+      <h3 class="lightGrey">
+                                                           {{recentlyEventData.name}}
+                                                           </h3>
+    </a>
+
+    <h4>{{!_Helpers.isNullOrEmpty(recentlyEventData.venue) && !_Helpers.isNullOrEmpty(recentlyEventData.venue.address1) ? recentlyEventData.venue.address1+',':''}}
+       {{!_Helpers.isNullOrEmpty(recentlyEventData.venue) && !_Helpers.isNullOrEmpty(recentlyEventData.venue.address2) ? recentlyEventData.venue.address2+',':''}}
+       {{recentlyEventData.venue ? recentlyEventData.venue.city : ''}}</h4>
+    <ul class="ageGroup">
+      <li class="lightGrey" *ngFor="let age of _Helpers.filterEventArray(recentlyEventData.events, ['age','name'])">{{age}} </li>
+    </ul>
+    <div class="list-age">
+      <ul class="ageGroup ageGlist">
+        <li *ngFor="let age of _Helpers.filterEventArray(recentlyEventData.events, ['userGender','name'])">{{age + 's'}} </li>
+        <li *ngFor="let gtype of _Helpers.filterEventArray(recentlyEventData.events, ['style','name'])">{{gtype }} </li>
+      </ul>
+    </div>
+    <div class="clearfix">
+    </div>
+  </div>
+  <div class="events eventHeight">
+    <div class="positionButtonFix">
+      <ul class="RegisterButton" *ngIf="recentlyEventData.uniqueName=='Badminton-Gurgaon-21GurgaonDistrictOpenBadmintonChampionship-2016-2017'">
+
+        <li><a href="/specialevent/{{recentlyEventData.uniqueName}}" class="Result">Results</a></li>
+        <li><a href="/specialevent/{{recentlyEventData.uniqueName}}?tab=3" class="Photo">Photos</a> </li>
+      </ul>
+      <ul class="RegisterButton" *ngIf="recentlyEventData.uniqueName!='Badminton-Gurgaon-21GurgaonDistrictOpenBadmintonChampionship-2016-2017'">
+
+        <li *ngIf="recentlyEventData.uniqueName != 'yogems-cricket-championship-series-2016-noida-12-2016'">
+          <a href="{{recentlyEventData.isParent==1?'/annual-event/':'/winners/'}}{{recentlyEventData.uniqueName}}" class="Result">Results</a>
+        </li>
+        <li *ngIf="recentlyEventData.uniqueName == 'yogems-cricket-championship-series-2016-noida-12-2016'">
+          <a href="{{recentlyEventData.isParent==1?'/annual-event/':'/event/'}}{{recentlyEventData.uniqueName+'?results'}}" class="Result">Results</a>
+        </li>
+        <li>
+          <a href="/gallery/{{recentlyEventData.uniqueName}}" class="Photo">Photos</a> </li>
+        <li>
+          <a href="/press/{{recentlyEventData.uniqueName}}" class="Press">Press</a></li>
+      </ul>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,87 @@
+<h2>Match List</h2>
+<div class="row" *ngIf="myMatchs?.length > 0">
+<!-- Total num of matchs===>&nbsp;{{myMatchs | commonFilter:[filterBy, filteredCount]}} -->
+</div>
+<div>
+  <div class='row' *ngIf='myMatchs && myMatchs.length'>
+           <div class=''>Filter by:</div>
+           <div class='SearchField'>
+               <!-- <input type='text' [(ngModel)]='userFilter.team1NameTemp' /> -->
+               <input type='text' [(ngModel)]='userFilter'/>
+           </div>
+ </div>
+<div class='table-responsive MatchList'>
+   <img  *ngIf='!(myMatchs && myMatchs.length)' src="../assets/imageLoading.gif" class="loadingMorePosts"/>
+       <table class='table table-bordered'
+              *ngIf='myMatchs && myMatchs.length' width="100%">
+           <thead>
+               <tr>
+                   <th>Index</th>
+                   <th>Date/Time</th>
+                   <th>Draw</th>
+                   <th>Round</th>
+                   <th>Match</th>
+                   <th>Score</th>
+                   <th>Court</th>
+               </tr>
+           </thead>
+           <tbody>
+               <tr *ngFor='let match of myMatchs | myFilter:userFilter; let i = index'>
+               <!-- <tr *ngFor='let match of myMatchs | filterBy: userFilter; let i = index'> -->
+                   <td>{{i+1}}</td>
+                   <td>{{match.matchStartTDateAndTime}}</td>
+                   <!-- <td>{{util.changeDateFormat(value.matchStartTDateAndTime , 'specialDateTime')}}</td> -->
+                   <td>{{match.eventName}}</td>
+                   <td>{{match.roundName | capitalize}}</td>
+                   <!-- <td>{{match.team1NameTemp}}&nbsp;{{match.team2NameTemp}}</td> -->
+                   <td *ngIf="match.team1">
+                     <span *ngFor="let names of match.team1.participants; let i = index" >
+                        <b *ngIf="match.winner == 'team1'">{{names.name  | capitalize}}{{(match.team1.participants.length != i+1) ? ' + ':''}}</b>
+                        <span *ngIf="match.winner != 'team1'">{{names | capitalize}}{{(match.team1.participants.length != i+1) ? ' + ':''}}</span>
+                    </span>
+                    &nbsp;&nbsp;-&nbsp;&nbsp;
+                    <span *ngFor="let names of match.team2.participants; let i = index">
+                        {{names.name | capitalize}}{{(match.team2.participants.length != i+1) ? '+':''}}
+                    </span>
+                   </td>
+                   <td *ngIf="!match.team1">
+                     {{match.team1NameTemp}}
+                     <span>
+                      &nbsp;&nbsp;-&nbsp;&nbsp;{{match.team2NameTemp}} </span>
+                   </td>
+                   <!-- <td>{{match.scoreTemp}}</td> -->
+                   <td>
+                     <div *ngIf="match.team1Score">
+                       <span *ngIf="match.team1Score.length == 1">
+                            {{(match.team1Score[0]==0 && (match.team2Score[0]==0 ||match.team2Score[0]==null))?match.scoreTemp:match.team1Score[0]+'-' }}{{!(match.team1Score[0]==0 && (match.team2Score[0]==0 ||match.team2Score[0]==null))?match.team2Score[0]:''}}
+                        </span>
+                        <span *ngIf="match.team1Score.length == 2">
+                            {{(match.team1Score[0]==0 && match.team1Score[1]==0 )? match.scoreTemp :match.team1Score[0]+'-'}}{{!(match.team1Score[0]==0 && match.team1Score[1]==0 )? match.team2Score[0]:''}}{{!(match.team1Score[0]==0 && match.team1Score[1]==0 )?' | ':' '}}{{!(match.team1Score[0]==0 && match.team1Score[1]==0 )? match.team1Score[1]+'-':''}}{{!(match.team1Score[0]==0 && match.team1Score[1]==0 )? match.team2Score[1]:''}}
+                        </span>
+                        <span *ngIf="match.team1Score.length == 3">
+                            {{match.team1Score[0]}}-{{match.team2Score[0]}}&nbsp;|&nbsp;{{match.team1Score[1]}}-{{match.team2Score[1]}}&nbsp;|&nbsp;{{match.team1Score[2]}}-{{match.team2Score[2]}}
+                        </span>
+                        <span *ngIf="match.team1Score.length == 4">
+                            {{match.team1Score[0]}}-{{match.team2Score[0]}}&nbsp;|&nbsp;{{match.team1Score[1]}}-{{match.team2Score[1]}}&nbsp;|&nbsp;{{match.team1Score[2]}}-{{match.team2Score[2]}}&nbsp;|&nbsp;{{match.team1Score[3]}}-{{match.team2Score[3]}}
+                        </span>
+                        <span *ngIf="match.team1Score.length == 5">
+                            {{match.team1Score[0]}}-{{match.team2Score[0]}}&nbsp;|&nbsp;{{match.team1Score[1]}}-{{match.team2Score[1]}}&nbsp;|&nbsp;{{match.team1Score[2]}}-{{match.team2Score[2]}}&nbsp;|&nbsp;{{match.team1Score[3]}}-{{match.team2Score[3]}}&nbsp;|&nbsp;{{match.team1Score[4]}},{{match.team2Score[4]}}
+                        </span>
+                     </div>
+                   </td>
+                   <td>{{match.courtName}}</td>
+               </tr>
+           </tbody>
+       </table>
+       <!-- <div *ngIf="myMatchs && (myMatchs | filterBy: userFilter).length === 0">No matching elements</div> -->
+       <div *ngIf="myMatchs && (myMatchs | myFilter:userFilter).length === 0" style="color:red">No records found with {{userFilter}}.</div>
+   </div>
+</div>
+<ul class="demo-list-icon mdl-list">
+  <li class="mdl-list__item" *ngFor="let dog of matchs | async">
+    <span class="mdl-list__item-primary-content">
+        <i class="material-icons mdl-list__item-icon">pets</i>
+        <a [routerLink]="['/match', dog.id.$t]">{{ dog.name.$t }}</a>
+    </span>
+  </li>
+</ul>

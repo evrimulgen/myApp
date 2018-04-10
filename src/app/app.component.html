@@ -1,0 +1,37 @@
+<style>
+#mainContainer { min-height: 800px; }
+</style>
+
+<div class="demo-layout-transparent mdl-layout mdl-js-layout">
+  <header></header>
+     <!-- <header class="mdl-layout__header mdl-layout__header--transparent">
+       <div class="mdl-layout__header-row">
+         <span class="mdl-layout-title">
+           <div class="lrg-logo"><a href="/"><img src="../assets/logo.png" class="logo" style="width: 100px;"></a></div>
+         </span>
+         <div class="mdl-layout-spacer"></div>
+
+         <nav class="mdl-navigation">
+           <a class="mdl-navigation__link" [routerLink]="['/']">Home</a>
+           <a class="mdl-navigation__link" [routerLink]="['/matchList']">Match-List</a>
+           <a class="mdl-navigation__link" [routerLink]="['/liveMatch']">Live-Match</a>
+           <a class="mdl-navigation__link" [routerLink]="['/event','table-tennis-gurgaon-yogems-table-tennis-gurgaon-district-ranking-tournament-04-2017']">Event</a>
+         </nav>
+       </div>
+     </header> -->
+
+     <!--
+     <main class="mdl-layout__content">
+       <h1 class="header-text">{{description}}</h1>
+     </main>
+   -->
+
+     <!-- Router Outlet -->
+     <div class="contentWrapper" id="mainContainer">
+       <router-outlet style="min-height: 800px"></router-outlet>
+     </div>
+     <div class="footer">
+       <footer ></footer>
+     </div>
+
+   </div>
